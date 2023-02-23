@@ -20,7 +20,7 @@ There are a few known bugs, which I am working on
 
 5.
 ```python
-import javascript as js
+import js_control as js
 tabdata = {"url": "URL OF TAB", "title": "TITLE OF TAB"} # Data used to identify tab
 tab = js.WSSTab("127.0.0.1", 16388, tabdata) # Connect to browser tab
 document = js.Object("document", tab) # Locate document object on tab
@@ -65,7 +65,7 @@ OR
 
 ## Docs
 
-### javascript.variable
+### js_control.variable
 
 #### class Variable
 
@@ -102,25 +102,25 @@ Gets, sets or deletes item on javascript variable. Requires two pairs of quotes
 
 ##### def __repr__
 
-Returns <{self.__class__.__module__}.{self.__class__.__name__} {self._name or self._def} at {hex(id(self))}>
+Returns `<{self.__class__.__module__}.{self.__class__.__name__} {self._name or self._def} at {hex(id(self))}>`
 
 ##### def __str__
 
-Returns self._name or self._def if applicable
+Returns `self._name` or `self._def` if applicable
 
 ##### def __bytes__
 
-Returns str(self).encode()
+Returns `str(self).encode()`
 
 ##### def __bool__
 
-Returns (self._tab.send_script(f"String(!!{self._name})") == "true")
+Returns `(self._tab.send_script(f"String(!!{self._name})") == "true")`
 
-### javascript.primitives
+### js_control.primitives
 
 #### class Undefined, Symbol, Object, Boolean, BigInt
 
-Returned from javascript.variable.Variable.__new__ when JS variable referred to corresponds to type. No special functions
+Returned from `javascript.variable.Variable.__new__` when JS variable referred to corresponds to type. No special functions
 
 #### class Function(Variable, jstype="function")
 
@@ -128,7 +128,7 @@ Returned from javascript.variable.Variable.__new__ when JS variable referred to 
 
 The really interesting part! Parses args and kwargs into string literal and returns Variable with function call as _def
 
-Creates a new variable on javascript end using once=True
+Creates a new variable on javascript end using `once=True`
 
 #### class Number(Variable, jstype="number")
 
@@ -142,11 +142,11 @@ Just returns integer representation of itself
 
 Just returns string representation of itself
 
-### javascript.errors
+### js_control.errors
 
-Im not writing that. if you want to see, just look at javascript.errors.all_errors
+Im not writing that. if you want to see, just look at `js.errors.all_errors`
 
-### javascript.utils
+### js_control.utils
 
 #### def rand_string(l=6)
 
@@ -160,7 +160,7 @@ For those who cannot write f'"{string}"'
 
 Gets the real type of a JS object. uses Object.prototype.toString.call
 
-### javascript.communication
+### js_control.communication
 
 #### class BaseTab
 
@@ -186,7 +186,7 @@ Just sets up variables, will only connect to ping tab unless ping is False
 
 ##### def __repr__(self)
 
-Returns f"{self.__class__.__name__}({self.connection[0]}, {self.connection[1]}, {self.tabdata})"
+Returns `f"{self.__class__.__name__}({self.connection[0]}, {self.connection[1]}, {self.tabdata})"`
 
 ##### def send_json(self, data)
 
@@ -207,7 +207,7 @@ Also not done yet
 ##### classmethod async def async_get_tabs(cls, host, port, url_search, title_search)
 
 Forces all tabs to resend data, returns list of WSSTab.
-URL search and title search not implemented, do not use
+URL search and title search not implemented, do not use the arguments
 
 ##### classmethod def get_tabs(cls, host="127.0.0.1", port=16388, url_search='', title_search='')
 
@@ -216,3 +216,4 @@ Just calls the function described above
 #### class NodeTab(BaseTab)
 
 Definently not done yet, only works on linux due to broken pty module
+
