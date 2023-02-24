@@ -26,8 +26,8 @@ tab = js.WSSTab("127.0.0.1", 16388, tabdata) # Connect to browser tab
 document = js.Object("document", tab) # Locate document object on tab
 
 myelement = document.createElement('"p"')
-document.body.appendChild(myelement._name) # _name contains the javascript variable name
 myelement.innerHTML = '"I ran javascript"' # You must surround a string in two sets of quotes
+document.body.appendChild(myelement._name) # _name contains the javascript variable name
 ```
 Notice that the string on the last line is surrounded in two pairs of quotes.
 This is because one pair will refer to a javascript variable name, not a string literal
