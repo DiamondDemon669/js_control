@@ -8,8 +8,6 @@ Also tested on KDE Falkon :)
 
 There are a few known bugs, which I am working on
 
-I just found out I forgot to include setup.py. this will be fixed ASAP
-
 ## How to use
 
 1. Clone the repo
