@@ -2,7 +2,7 @@
 
 This project allows you to control browser tabs from python (also nodejs terminal, coming soon)
 
-Tested on Chrome 96, Firefox 108 on Linux and Windows x86 with Tampermonkey
+Tested on Chrome 96, Firefox 108 on Linux and Windows x86 with Tampermonkey and Python 3.8
 
 Also tested on KDE Falkon :)
 
@@ -30,8 +30,8 @@ myelement.innerHTML = '"I ran javascript"' # You must surround a string in two s
 document.body.appendChild(myelement._name) # _name contains the javascript variable name
 ```
 Notice that the string on the last line is surrounded in two pairs of quotes.
-This is because one pair will refer to a javascript variable name, not a string literal
-If you need help with this, use the function `js.stringify(string)`
+This is because one pair will refer to a javascript variable name, not a string literal.
+If you need help with this, use the function `js.stringify(string)`.
 This does not apply to integers
 
 ## Data model
