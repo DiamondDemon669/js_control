@@ -19,7 +19,7 @@ class Function(Variable, jstype="function"):
             kwargs[x] = stringify(y)
         parsed_args = str(args).strip("[]").replace("\'", '') + (', ' if kwargs else '')
         parsed_args += ", ".join([f"{k}={v}" for k, v in kwargs.items()])
-        parsed_args = parsed_args.strip().rstrip(",")
+        parsed_args = parsed_args.strip().strip(",").strip()
         return Variable(f"{self._name}({parsed_args})", self._tab, once=True)
 
 class Boolean(Variable, jstype="boolean"):
