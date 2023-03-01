@@ -25,14 +25,11 @@ tabdata = {"url": "URL OF TAB", "title": "TITLE OF TAB"} # Data used to identify
 tab = js.WSSTab("127.0.0.1", 16388, tabdata) # Connect to browser tab
 document = js.Object("document", tab) # Locate document object on tab
 
-myelement = document.createElement('"p"')
-myelement.innerHTML = '"I ran javascript"' # You must surround a string in two sets of quotes
-document.body.appendChild(myelement._name) # _name contains the javascript variable name
+myelement = document.createElement("p")
+myelement.innerHTML = "I ran javascript"
+document.body.appendChild(myelement)
 ```
-Notice that the string on the last line is surrounded in two pairs of quotes.
-This is because one pair will refer to a javascript variable name, not a string literal.
-If you need help with this, use the function `js.stringify(string)`.
-This does not apply to integers
+As of the latest update, you no longer need to place strings in double quotes. If you want to refer to a JS variable, use a new Variable object
 
 ## Data model
 
@@ -154,7 +151,7 @@ Generates a random string. used by Variable to generate new variable name
 
 #### def stringify(string)
 
-For those who cannot write f'"{string}"'
+Converts various python types to valid literals in javascript
 
 #### def object_type(obj)
 
