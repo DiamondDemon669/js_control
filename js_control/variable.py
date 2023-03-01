@@ -1,4 +1,4 @@
-from .utils import rand_string
+from .utils import rand_string, stringify
 from .communication import BaseTab
 
 class Variable:
@@ -24,6 +24,8 @@ class Variable:
         if once:
             object.__setattr__(obj, "_def", definition)
         return obj
+    def __matmul__(self, value):
+        return self._tab.send_script(f"{self._name} = {stringify(value)}")
     def __getattr__(self, name):
         if name in object.__getattribute__(self, "__dict__"):
             return object.__getattribute__(self, "__dict__")[name]
@@ -33,19 +35,19 @@ class Variable:
         else:
             return attr
     def __setattr__(self, name, value):
-        self._tab.send_script(f"{self._name}.{name} = {value}")
+        self._tab.send_script(f"{self._name}.{name} = {stringify(value)}")
     def __delattr__(self, name):
         self._tab.send_script(f"{self._name}.{name} = undefined")
     def __getitem__(self, name):
-        item = Variable(f"{self._name}[{name}]", self._tab)
+        item = Variable(f"{self._name}[{stringify(name)}]", self._tab)
         if isinstance(item, self._registry["undefined"]):
             raise KeyError(item)
         else:
             return item
     def __setitem__(self, name, value):
-        self._tab.send_script(f"{self._name}[{name}] = {value}")
+        self._tab.send_script(f"{self._name}[{stringify(name)}] = {stringify(value)}")
     def __delitem__(self, name):
-        self._tab.send_script(f"{self._name}[{name}] = undefined")
+        self._tab.send_script(f"{self._name}[{stringify(name)}] = undefined")
     def __repr__(self):
         objrepr = object.__repr__(self)
         try:

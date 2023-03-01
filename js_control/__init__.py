@@ -10,3 +10,7 @@ from .errors import *
 # Designed to be compatible with as many browsers as possible
 # If you want to adapt for selenium or anything else like brotab, create a class inheriting from javascript.communication.BaseTab
 # If you are adding a different communication method, include all methods in the tab class using @staticmethod
+
+from . import utils
+utils.Variable = Variable
+# To avoid circular import in variable/utils
