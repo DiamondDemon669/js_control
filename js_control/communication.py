@@ -44,8 +44,11 @@ class WSSTab(BaseTab):
         if rdata.get("return"):
             return rdata["return"]
         elif rdata.get("error"):
-            err, msg = rdata.split(': ')
-            raise all_errors[err](msg)
+            try:
+                err, msg = rdata["error"].split(': ')
+            except AttributeError, ValueError:
+                err, msg = rdata["error"], ''
+            raise getattr(all_errors.get(err), "__call__", (lambda x:Exception))(msg) # Check if error in js.errors and is callable
     def start_callback(self, func): #TODO
         def wrapper():
             nonlocal self, func

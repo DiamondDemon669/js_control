@@ -2,13 +2,11 @@
 
 This project allows you to control browser tabs from python (also nodejs terminal, coming soon)
 
-Tested on Chrome 96, Firefox 108 on Linux and Windows x86 with Tampermonkey
+Tested on Chrome 96, Firefox 108 on Linux and Windows x86 with Tampermonkey and Python 3.8
 
 Also tested on KDE Falkon :)
 
 There are a few known bugs, which I am working on
-
-I just found out I forgot to include setup.py. this will be fixed ASAP
 
 ## How to use
 
@@ -28,12 +26,12 @@ tab = js.WSSTab("127.0.0.1", 16388, tabdata) # Connect to browser tab
 document = js.Object("document", tab) # Locate document object on tab
 
 myelement = document.createElement('"p"')
-document.body.appendChild(myelement._name) # _name contains the javascript variable name
 myelement.innerHTML = '"I ran javascript"' # You must surround a string in two sets of quotes
+document.body.appendChild(myelement._name) # _name contains the javascript variable name
 ```
 Notice that the string on the last line is surrounded in two pairs of quotes.
-This is because one pair will refer to a javascript variable name, not a string literal
-If you need help with this, use the function `js.stringify(string)`
+This is because one pair will refer to a javascript variable name, not a string literal.
+If you need help with this, use the function `js.stringify(string)`.
 This does not apply to integers
 
 ## Data model
